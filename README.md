@@ -1,6 +1,6 @@
 # <h1 align="center">WhatssAdd</h1><br>
 
-<p align="center">https://cosmeticosecia.vercel.app/</p>
+<p align="center">https://whatss-add.vercel.app/</p>
 
 A simple program I developed in javascript based on my need to start new conversations with numbers not registered on WhatsApp Web.
 
