@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whatss Add</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      padding: 20px 20px 0 20px;
+    }
+
+    .lang {
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 15px;
+      outline: none;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+    }
+
+    .lang option {
+      color: black;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      padding: 35px 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.30);
+      backdrop-filter: blur(12px);
+      text-align: center;
+    }
+
+    .tile {
+      font-size: 38px;
+      margin-bottom: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: #d8e6ec;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+
+    .form {
+      width: 100%;
+      padding: 15px 16px;
+      margin-bottom: 14px;
+      border: none;
+      border-radius: 14px;
+      font-size: 17px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.92);
+      color: #1b1b1b;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+    }
+
+    .form:focus {
+      box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.25);
+    }
+
+    .button {
+      width: 100%;
+      border: none;
+      border-radius: 14px;
+      padding: 15px 18px;
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-paste {
+      background: #ffffff;
+      color: #1d1d1d;
+      margin-bottom: 10px;
+    }
+
+    .button-paste:hover {
+      background: #f1f1f1;
+    }
+
+    .button-main {
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: white;
+    }
+
+    .button-main:hover {
+      filter: brightness(1.05);
+    }
+
+    .button-back {
+      background: rgba(255, 255, 255, 0.14);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .button-back:hover {
+      background: rgba(255, 255, 255, 0.20);
+    }
+
+    .result-box {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .info {
+      font-size: 24px;
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+
+    .link_result {
+      display: inline-block;
+      margin-top: 8px;
+      color: #7dffb0;
+      font-size: 28px;
+      font-weight: bold;
+      text-decoration: none;
+      word-break: break-all;
+      transition: 0.2s ease;
+    }
+
+    .link_result:hover {
+      color: #b6ffd0;
+      text-decoration: underline;
+    }
+
+    .rodape {
+      text-align: center;
+      padding: 20px 20px 30px;
+    }
+
+    .rodape_link {
+      text-decoration: none;
+      font-size: 16px;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .rodape_link:hover {
+      text-decoration: underline;
+    }
+
+    .direitos {
+      margin-top: 14px;
+      font-size: 13px;
+      color: #d5dfe4;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      .tile {
+        font-size: 30px;
+      }
+
+      .info {
+        font-size: 21px;
+      }
+
+      .link_result {
+        font-size: 22px;
+      }
+
+      .card {
+        padding: 28px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <select id="languageSelect" class="lang" onchange="changeLanguage()">
+      <option value="">Language</option>
+      <option value="pt">Português</option>
+      <option value="en">English</option>
+    </select>
+  </div>
+
+  <main class="main">
+    <div class="card">
+      <div id="respo">
+        <h1 class="tile" id="title">Whatss Add</h1>
+        <p class="subtitle" id="enterNumber">Enter your WhatsApp number:</p>
+
+        <select id="countryCode" class="form" autofocus>
+          <option id="country" value="55">Select Country</option>
+          <option value="93">Afghanistan (+93)</option>
+          <option value="355">Albania (+355)</option>
+          <option value="213">Algeria (+213)</option>
+          <option value="376">Andorra (+376)</option>
+          <option value="244">Angola (+244)</option>
+          <option value="54">Argentina (+54)</option>
+          <option value="374">Armenia (+374)</option>
+          <option value="61">Australia (+61)</option>
+          <option value="43">Austria (+43)</option>
+          <option value="994">Azerbaijan (+994)</option>
+          <option value="973">Bahrain (+973)</option>
+          <option value="880">Bangladesh (+880)</option>
+          <option value="375">Belarus (+375)</option>
+          <option value="32">Belgium (+32)</option>
+          <option value="501">Belize (+501)</option>
+          <option value="229">Benin (+229)</option>
+          <option value="975">Bhutan (+975)</option>
+          <option value="591">Bolivia (+591)</option>
+          <option value="387">Bosnia and Herzegovina (+387)</option>
+          <option value="267">Botswana (+267)</option>
+          <option value="55">Brazil (+55)</option>
+          <option value="673">Brunei (+673)</option>
+          <option value="359">Bulgaria (+359)</option>
+          <option value="226">Burkina Faso (+226)</option>
+          <option value="257">Burundi (+257)</option>
+          <option value="855">Cambodia (+855)</option>
+          <option value="237">Cameroon (+237)</option>
+          <option value="1">Canada (+1)</option>
+          <option value="238">Cape Verde (+238)</option>
+          <option value="236">Central African Republic (+236)</option>
+          <option value="235">Chad (+235)</option>
+          <option value="56">Chile (+56)</option>
+          <option value="86">China (+86)</option>
+          <option value="57">Colombia (+57)</option>
+          <option value="269">Comoros (+269)</option>
+          <option value="242">Congo (+242)</option>
+          <option value="243">DR of the Congo (+243)</option>
+          <option value="506">Costa Rica (+506)</option>
+          <option value="385">Croatia (+385)</option>
+          <option value="53">Cuba (+53)</option>
+          <option value="357">Cyprus (+357)</option>
+          <option value="420">Czech Republic (+420)</option>
+          <option value="45">Denmark (+45)</option>
+          <option value="253">Djibouti (+253)</option>
+          <option value="593">Ecuador (+593)</option>
+          <option value="20">Egypt (+20)</option>
+          <option value="503">El Salvador (+503)</option>
+          <option value="240">Equatorial Guinea (+240)</option>
+          <option value="291">Eritrea (+291)</option>
+          <option value="372">Estonia (+372)</option>
+          <option value="251">Ethiopia (+251)</option>
+          <option value="679">Fiji (+679)</option>
+          <option value="358">Finland (+358)</option>
+          <option value="33">France (+33)</option>
+          <option value="241">Gabon (+241)</option>
+          <option value="220">Gambia (+220)</option>
+          <option value="995">Georgia (+995)</option>
+          <option value="49">Germany (+49)</option>
+          <option value="233">Ghana (+233)</option>
+          <option value="30">Greece (+30)</option>
+          <option value="299">Greenland (+299)</option>
+          <option value="502">Guatemala (+502)</option>
+          <option value="224">Guinea (+224)</option>
+          <option value="245">Guinea-Bissau (+245)</option>
+          <option value="592">Guyana (+592)</option>
+          <option value="509">Haiti (+509)</option>
+          <option value="504">Honduras (+504)</option>
+          <option value="36">Hungary (+36)</option>
+          <option value="354">Iceland (+354)</option>
+          <option value="91">India (+91)</option>
+          <option value="62">Indonesia (+62)</option>
+          <option value="98">Iran (+98)</option>
+          <option value="964">Iraq (+964)</option>
+          <option value="353">Ireland (+353)</option>
+          <option value="972">Israel (+972)</option>
+          <option value="39">Italy (+39)</option>
+          <option value="225">Ivory Coast (+225)</option>
+          <option value="81">Japan (+81)</option>
+          <option value="962">Jordan (+962)</option>
+          <option value="7">Kazakhstan (+7)</option>
+          <option value="254">Kenya (+254)</option>
+          <option value="686">Kiribati (+686)</option>
+          <option value="965">Kuwait (+965)</option>
+          <option value="996">Kyrgyzstan (+996)</option>
+          <option value="856">Laos (+856)</option>
+          <option value="371">Latvia (+371)</option>
+          <option value="961">Lebanon (+961)</option>
+          <option value="266">Lesotho (+266)</option>
+          <option value="231">Liberia (+231)</option>
+          <option value="218">Libya (+218)</option>
+          <option value="423">Liechtenstein (+423)</option>
+          <option value="370">Lithuania (+370)</option>
+          <option value="352">Luxembourg (+352)</option>
+          <option value="261">Madagascar (+261)</option>
+          <option value="265">Malawi (+265)</option>
+          <option value="60">Malaysia (+60)</option>
+          <option value="960">Maldives (+960)</option>
+          <option value="223">Mali (+223)</option>
+          <option value="356">Malta (+356)</option>
+          <option value="692">Marshall Islands (+692)</option>
+          <option value="222">Mauritania (+222)</option>
+          <option value="230">Mauritius (+230)</option>
+          <option value="52">Mexico (+52)</option>
+          <option value="691">Micronesia (+691)</option>
+          <option value="373">Moldova (+373)</option>
+          <option value="377">Monaco (+377)</option>
+          <option value="976">Mongolia (+976)</option>
+          <option value="382">Montenegro (+382)</option>
+          <option value="212">Morocco (+212)</option>
+          <option value="258">Mozambique (+258)</option>
+          <option value="95">Myanmar (+95)</option>
+          <option value="264">Namibia (+264)</option>
+          <option value="674">Nauru (+674)</option>
+          <option value="977">Nepal (+977)</option>
+          <option value="31">Netherlands (+31)</option>
+          <option value="64">New Zealand (+64)</option>
+          <option value="505">Nicaragua (+505)</option>
+          <option value="227">Niger (+227)</option>
+          <option value="234">Nigeria (+234)</option>
+          <option value="850">North Korea (+850)</option>
+          <option value="47">Norway (+47)</option>
+          <option value="968">Oman (+968)</option>
+          <option value="92">Pakistan (+92)</option>
+          <option value="680">Palau (+680)</option>
+          <option value="507">Panama (+507)</option>
+          <option value="675">Papua New Guinea (+675)</option>
+          <option value="595">Paraguay (+595)</option>
+          <option value="51">Peru (+51)</option>
+          <option value="63">Philippines (+63)</option>
+          <option value="48">Poland (+48)</option>
+          <option value="351">Portugal (+351)</option>
+          <option value="974">Qatar (+974)</option>
+          <option value="40">Romania (+40)</option>
+          <option value="7">Russia (+7)</option>
+          <option value="250">Rwanda (+250)</option>
+          <option value="685">Samoa (+685)</option>
+          <option value="378">San Marino (+378)</option>
+          <option value="239">Sao Tome and Principe (+239)</option>
+          <option value="966">Saudi Arabia (+966)</option>
+          <option value="221">Senegal (+221)</option>
+          <option value="381">Serbia (+381)</option>
+          <option value="248">Seychelles (+248)</option>
+          <option value="232">Sierra Leone (+232)</option>
+          <option value="65">Singapore (+65)</option>
+          <option value="421">Slovakia (+421)</option>
+          <option value="386">Slovenia (+386)</option>
+          <option value="677">Solomon Islands (+677)</option>
+          <option value="252">Somalia (+252)</option>
+          <option value="27">South Africa (+27)</option>
+          <option value="82">South Korea (+82)</option>
+          <option value="211">South Sudan (+211)</option>
+          <option value="34">Spain (+34)</option>
+          <option value="94">Sri Lanka (+94)</option>
+          <option value="249">Sudan (+249)</option>
+          <option value="597">Suriname (+597)</option>
+          <option value="268">Swaziland (+268)</option>
+          <option value="46">Sweden (+46)</option>
+          <option value="41">Switzerland (+41)</option>
+          <option value="963">Syria (+963)</option>
+          <option value="886">Taiwan (+886)</option>
+          <option value="992">Tajikistan (+992)</option>
+          <option value="255">Tanzania (+255)</option>
+          <option value="66">Thailand (+66)</option>
+          <option value="228">Togo (+228)</option>
+          <option value="676">Tonga (+676)</option>
+          <option value="216">Tunisia (+216)</option>
+          <option value="90">Turkey (+90)</option>
+          <option value="993">Turkmenistan (+993)</option>
+          <option value="688">Tuvalu (+688)</option>
+          <option value="256">Uganda (+256)</option>
+          <option value="380">Ukraine (+380)</option>
+          <option value="971">United Arab Emirates (+971)</option>
+          <option value="44">United Kingdom (+44)</option>
+          <option value="1">United States (+1)</option>
+          <option value="598">Uruguay (+598)</option>
+          <option value="998">Uzbekistan (+998)</option>
+          <option value="678">Vanuatu (+678)</option>
+          <option value="58">Venezuela (+58)</option>
+          <option value="84">Vietnam (+84)</option>
+          <option value="967">Yemen (+967)</option>
+          <option value="260">Zambia (+260)</option>
+          <option value="263">Zimbabwe (+263)</option>
+        </select>
+        <button onclick="colarNumero()" class="button button-paste" id="pasteBtn">Paste number</button>
+        <input
+          id="num"
+          type="text"
+          placeholder="ex 999742403"
+          class="form"
+          oninput="limparNumero(this)"
+        >
+
+        
+        <button onclick="adicionarTexto()" class="button button-main" id="gen">Click here</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="rodape">
+    <p><a class="rodape_link" href="http://mhps.com.br" target="_blank" id="denv">Developed by MHPS</a></p>
+    <p class="direitos" id="direito">© 2023 WhatsApp Inc. All rights reserved. WhatsApp and its logos are trademarks of WhatsApp Inc. This website uses WhatsApp as a communication tool and adheres to the platform's terms of service.</p>
+  </footer>
+
+  <script>
+    function changeLanguage() {
+      const language = document.getElementById("languageSelect").value;
+
+      if (!language) return;
+
+      const translations = {
+        "pt": {
+          "title": "Adicionar WhatsApp",
+          "enterNumber": "Digite seu número de WhatsApp:",
+          "denv": "Desenvolvido por MHPS",
+          "gen": "Clique aqui",
+          "pasteBtn": "Colar número",
+          "country": "Selecione o país",
+          "direito": "© 2023 WhatsApp Inc. Todos os direitos reservados. O WhatsApp e seus logotipos são marcas comerciais da WhatsApp Inc. Este site utiliza o WhatsApp como ferramenta de comunicação e segue os termos de serviço da plataforma.",
+          "clickNumber": "Clique no número abaixo para acessar:",
+          "invalidNumber": "Digite um número válido.",
+          "clipboardError": "Não foi possível acessar a área de transferência.",
+          "back": "Voltar"
+        },
+        "en": {
+          "title": "WhatsApp Add",
+          "enterNumber": "Enter your WhatsApp number:",
+          "denv": "Developed by MHPS",
+          "gen": "Click here",
+          "pasteBtn": "Paste number",
+          "country": "Select Country",
+          "direito": "© 2023 WhatsApp Inc. All rights reserved. WhatsApp and its logos are trademarks of WhatsApp Inc. This website uses WhatsApp as a communication tool and adheres to the platform's terms of service.",
+          "clickNumber": "Click on the number below to access:",
+          "invalidNumber": "Please enter a valid number.",
+          "clipboardError": "Could not access the clipboard.",
+          "back": "Back"
+        }
+      };
+
+      document.getElementById("title").innerText = translations[language].title;
+      document.getElementById("enterNumber").innerText = translations[language].enterNumber;
+      document.getElementById("denv").innerHTML = translations[language].denv;
+      document.getElementById("gen").innerHTML = translations[language].gen;
+      document.getElementById("pasteBtn").innerHTML = translations[language].pasteBtn;
+      document.getElementById("country").innerHTML = translations[language].country;
+      document.getElementById("direito").innerHTML = translations[language].direito;
+
+      const clickNumber = document.getElementById("clickNumber");
+      if (clickNumber) {
+        clickNumber.innerHTML = translations[language].clickNumber;
+      }
+
+      const buttonBack = document.getElementById("buttonBack");
+      if (buttonBack) {
+        buttonBack.value = translations[language].back;
+      }
+    }
+
+    function getLanguage() {
+      const language = document.getElementById("languageSelect").value;
+      return language === "pt" ? "pt" : "en";
+    }
+
+    function limparNumero(campo) {
+      campo.value = campo.value.replace(/\D/g, "");
+    }
+
+    async function colarNumero() {
+      const language = getLanguage();
+      const messages = {
+        pt: "Não foi possível acessar a área de transferência.",
+        en: "Could not access the clipboard."
+      };
+
+      try {
+        const texto = await navigator.clipboard.readText();
+        const somenteNumeros = texto.replace(/\D/g, "");
+        document.getElementById("num").value = somenteNumeros;
+      } catch (erro) {
+        alert(messages[language]);
+      }
+    }
+
+    function adicionarTexto() {
+      const countryCode = document.getElementById("countryCode").value;
+      const inputNum = document.getElementById("num");
+      const num = inputNum.value.replace(/\D/g, "");
+      const language = getLanguage();
+      const textTrad = document.getElementById("respo");
+
+      inputNum.value = num;
+
+      if (num.length > 0) {
+        let resultHtml;
+
+        if (language === "pt") {
+          resultHtml = `
+            <h1 class="tile" id="title">Adicionar WhatsApp</h1>
+            <div class="result-box">
+              <h2 class="info" id="clickNumber">Clique no número abaixo para acessar:</h2>
+              <a class="link_result" title="Clique aqui para acessar" href="https://wa.me/${countryCode}${num}" target="_blank">${countryCode}${num}</a>
+            </div>
+            <input class="button button-back" id="buttonBack" type="button" value="Voltar" title="Clique aqui para voltar" onClick="history.go(0)">
+          `;
+        } else {
+          resultHtml = `
+            <h1 class="tile" id="title">WhatsApp Add</h1>
+            <div class="result-box">
+              <h2 class="info" id="clickNumber">Click on the number below to access:</h2>
+              <a class="link_result" title="Click here to access" href="https://wa.me/${countryCode}${num}" target="_blank">${countryCode}${num}</a>
+            </div>
+            <input class="button button-back" id="buttonBack" type="button" value="Back" title="Click here to back" onClick="history.go(0)">
+          `;
+        }
+
+        textTrad.innerHTML = resultHtml;
+      } else {
+        alert(language === "pt" ? "Digite um número válido." : "Please enter a valid number.");
+      }
+    }
+  </script>
+</body>
+</html>
